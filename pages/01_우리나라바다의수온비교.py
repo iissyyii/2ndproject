@@ -5,11 +5,6 @@ import matplotlib.pyplot as plt
 st.set_page_config(layout="wide")
 st.title("대한민국 서해 vs 남해 월별 수온 비교 (2024.06 ~ 2025.06)")
 
-st.sidebar.header("데이터 정보")
-st.sidebar.markdown("""
-이 앱은 가상의 서해 및 남해 월별 수온 데이터를 사용하여 비교 그래프를 생성합니다.
-실제 데이터를 사용하려면 국립수산과학원 또는 기상청 API를 통해 데이터를 수집해야 합니다.
-""")
 
 # --- 데이터 로드 및 전처리 (실제 데이터는 API로 받아와야 함) ---
 # 예시 데이터 생성 (실제 데이터로 대체해야 합니다)
@@ -39,9 +34,11 @@ plt.xticks(rotation=45) # x축 라벨 회전
 
 st.pyplot(fig)
 
-# --- 데이터 테이블 표시 ---
-st.subheader("데이터 테이블")
-st.dataframe(df)
+# --- 데이터 테이블 표시 (접었다 폈다 기능 추가) ---
+# '데이터 테이블' 이라는 제목으로 expander를 만듭니다.
+with st.expander("전체 수온 데이터 테이블 보기"):
+    st.subheader("데이터 테이블") # expander 안에 소제목을 넣을 수 있습니다.
+    st.dataframe(df)
 
 # --- 추가 분석 (선택 사항) ---
 st.subheader("수온 차이 분석")
