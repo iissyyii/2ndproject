@@ -1,6 +1,7 @@
 import streamlit as st
 import folium
 from streamlit_folium import st_folium
+import pandas as pd
 
 st.set_page_config(page_title="베트남 남부 관광 가이드", layout="wide")
 
@@ -89,16 +90,7 @@ sights = {
 }
 
 
-import pandas as pd
 
-st.subheader("📌 주요 명소 리스트")
-
-# 선택된 관광지에 대한 명소 표 출력
-if selected_place in sights:
-    df = pd.DataFrame(sights[selected_place], columns=["명소", "설명"])
-    st.table(df)
-else:
-    st.info("이 지역에 대한 관광 명소 정보가 아직 없습니다.")
 
 
 
@@ -111,6 +103,18 @@ info = places[selected_place]
 st.header(f"📌 {selected_place}")
 st.image(info["image"], width=400)
 st.write(info["description"])
+
+
+st.subheader("📌 주요 명소 리스트")
+
+# 선택된 관광지에 대한 명소 표 출력
+if selected_place in sights:
+    df = pd.DataFrame(sights[selected_place], columns=["명소", "설명"])
+    st.table(df)
+else:
+    st.info("이 지역에 대한 관광 명소 정보가 아직 없습니다.")
+
+
 
 # 지도 표시
 m = folium.Map(location=[info["lat"], info["lon"]], zoom_start=10)
