@@ -14,8 +14,8 @@ st.title("대한민국 서해 vs 남해 월별 수온 비교 (2024.06 ~ 2025.06)
 months = pd.date_range(start='2024-06-01', periods=13, freq='MS') # 2024년 6월부터 2025년 6월까지 13개월
 data = {
     '월': months.strftime('%Y-%m'),
-    '서해_수온': [20.1, 22.5, 25.3, 27.8, 24.1, 20.2, 15.0, 10.5, 8.2, 12.0, 16.5, 18.8, 20.0], # 예시 수온
-    '남해_수온': [21.5, 23.9, 26.7, 28.9, 25.5, 21.6, 16.2, 12.8, 10.1, 14.3, 17.7, 19.9, 21.1]  # 예시 수온
+    'west': [20.1, 22.5, 25.3, 27.8, 24.1, 20.2, 15.0, 10.5, 8.2, 12.0, 16.5, 18.8, 20.0], # 예시 수온
+    'south': [21.5, 23.9, 26.7, 28.9, 25.5, 21.6, 16.2, 12.8, 10.1, 14.3, 17.7, 19.9, 21.1]  # 예시 수온
 }
 df = pd.DataFrame(data)
 df['월'] = pd.to_datetime(df['월']) # '월' 컬럼을 datetime 객체로 변환
@@ -25,8 +25,8 @@ st.subheader("월별 평균 수온 변화")
 
 fig1, ax1 = plt.subplots(figsize=(12, 6))
 
-ax1.plot(df['월'], df['서해_수온'], marker='o', label='서해')
-ax1.plot(df['월'], df['남해_수온'], marker='o', label='남해')
+ax1.plot(df['월'], df['west'], marker='o', label='서해')
+ax1.plot(df['월'], df['south'], marker='o', label='남해')
 
 ax1.set_xlabel("월", fontsize=12)
 ax1.set_ylabel("수온 (°C)", fontsize=12)
@@ -43,7 +43,7 @@ with st.expander("전체 수온 데이터 테이블 보기"):
     st.dataframe(df)
 
 # --- 수온 차이 계산 ---
-df['수온_차이'] = df['남해_수온'] - df['서해_수온']
+df['수온_차이'] = df['south'] - df['west']
 
 # --- 수온 차이 그래프 (고정 표시) ---
 st.subheader("남해 vs 서해 월별 수온 차이")
