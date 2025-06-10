@@ -54,7 +54,7 @@ selected_place = st.sidebar.selectbox("📍 관광지를 선택하세요", list(
 # 관광지 정보 출력
 info = places[selected_place]
 st.header(f"📌 {selected_place}")
-st.image(info["image"], use_column_width=True)
+st.image(info["image"], width=400)
 st.write(info["description"])
 
 # 지도 표시
