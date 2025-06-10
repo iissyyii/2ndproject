@@ -1,13 +1,6 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-import matplotlib.font_manager as fm
-
-# 한글 폰트 설정 (Windows 기준, Mac/Linux는 경로 다를 수 있음)
-# 나눔고딕이 설치되어 있지 않다면 다른 폰트명으로 변경하거나 설치해야 합니다.
-# fm.fontManager.addfont('NanumGothic.ttf') # 폰트 파일이 현재 디렉토리에 있을 경우
-plt.rcParams['font.family'] = 'Malgun Gothic' # Windows 기본 폰트
-plt.rcParams['axes.unicode_minus'] = False # 마이너스 기호 깨짐 방지
 
 st.set_page_config(layout="wide")
 st.title("대한민국 서해 vs 남해 월별 수온 비교 (2024.06 ~ 2025.06)")
@@ -23,8 +16,8 @@ st.sidebar.markdown("""
 months = pd.date_range(start='2024-06-01', periods=13, freq='MS') # 2024년 6월부터 2025년 6월까지 13개월
 data = {
     '월': months.strftime('%Y-%m'),
-    '서해_수온': [20, 22, 25, 27, 24, 20, 15, 10, 8, 12, 16, 18, 20], # 예시 수온
-    '남해_수온': [21, 23, 26, 28, 25, 21, 16, 12, 10, 14, 17, 19, 21]  # 예시 수온
+    '서해_수온': [20.1, 22.5, 25.3, 27.8, 24.1, 20.2, 15.0, 10.5, 8.2, 12.0, 16.5, 18.8, 20.0], # 예시 수온
+    '남해_수온': [21.5, 23.9, 26.7, 28.9, 25.5, 21.6, 16.2, 12.8, 10.1, 14.3, 17.7, 19.9, 21.1]  # 예시 수온
 }
 df = pd.DataFrame(data)
 df['월'] = pd.to_datetime(df['월']) # '월' 컬럼을 datetime 객체로 변환
