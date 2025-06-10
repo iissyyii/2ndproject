@@ -6,8 +6,11 @@ st.set_page_config(layout="wide")
 st.title("대한민국 서해 vs 남해 월별 수온 비교 (2024.06 ~ 2025.06)")
 
 
+
 # --- 데이터 로드 및 전처리 (실제 데이터는 API로 받아와야 함) ---
 # 예시 데이터 생성 (실제 데이터로 대체해야 합니다)
+# 현재 시간은 2025년 6월 10일이므로, 요청하신 기간의 데이터는 모두 과거 데이터입니다.
+# 실제 데이터를 사용하시려면 해당 기간의 데이터를 API로 조회하여 사용하세요.
 months = pd.date_range(start='2024-06-01', periods=13, freq='MS') # 2024년 6월부터 2025년 6월까지 13개월
 data = {
     '월': months.strftime('%Y-%m'),
@@ -34,18 +37,18 @@ plt.xticks(rotation=45) # x축 라벨 회전
 
 st.pyplot(fig)
 
-# --- 데이터 테이블 표시 (접었다 폈다 기능 추가) ---
-# '데이터 테이블' 이라는 제목으로 expander를 만듭니다.
+# --- 데이터 테이블 표시 (접었다 폈다 기능) ---
 with st.expander("전체 수온 데이터 테이블 보기"):
-    st.subheader("데이터 테이블") # expander 안에 소제목을 넣을 수 있습니다.
+    st.subheader("데이터 테이블")
     st.dataframe(df)
 
-# --- 추가 분석 (선택 사항) ---
-st.subheader("수온 차이 분석")
-df['수온_차이'] = df['남해_수온'] - df['서해_수온']
-st.line_chart(df[['월', '수온_차이']].set_index('월'))
-st.write("남해와 서해의 월별 수온 차이 (남해 - 서해):")
-st.dataframe(df[['월', '수온_차이']])
+# --- 수온 차이 분석 (접었다 폈다 기능 추가) ---
+with st.expander("남해 vs 서해 월별 수온 차이 분석 보기"):
+    st.subheader("수온 차이 분석")
+    df['수온_차이'] = df['남해_수온'] - df['서해_수온']
+    st.line_chart(df[['월', '수온_차이']].set_index('월'))
+    st.write("남해와 서해의 월별 수온 차이 (남해 - 서해):")
+    st.dataframe(df[['월', '수온_차이']])
 
 st.markdown("---")
 st.markdown("Made with ❤️ by Gemini AI")
