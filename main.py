@@ -106,7 +106,6 @@ st.image(info["image"], width=400)
 st.write(info["description"])
 
 
-st.subheader("📌 주요 명소 리스트")
 
 st.subheader("📌 주요 명소 리스트")
 
